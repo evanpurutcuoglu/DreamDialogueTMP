@@ -9,8 +9,11 @@ const LiveChat = () => {
     const [post, setPost] = useState(null);
     const location = useLocation();
 
+    const wsurlhack = 'ws://dreamdialogtest.vercel.app';
+    const urlhack = 'dreamdialogtest.vercel.app';
+    
     useEffect(() => {
-        const newSocket = new WebSocket('ws://localhost:3001');
+        const newSocket = new WebSocket(wsurlhack);
         setSocket(newSocket);
 
         newSocket.onmessage = (event) => {
@@ -26,7 +29,7 @@ const LiveChat = () => {
         const postId = params.get('postId');
         if (postId) {
             console.log(`Fetching post with ID: ${postId}`); // Add logging
-            axios.get(`http://localhost:3001/api/posts/${postId}`)
+            axios.get(`http://${urlhack}/api/posts/${postId}`)
                 .then(response => {
                     console.log('Post fetched successfully:', response.data); // Add logging
                     setPost(response.data);
